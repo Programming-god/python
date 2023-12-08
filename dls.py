@@ -34,14 +34,16 @@ def print_puzzle(puzzle):
 
 # Iterative Deepening Search
 def iterative_deepening_search(start_state):
-    depth = 0
-
-    while True:
-        print(f"Checking depth: {depth}")
-        result = depth_limited_search(start_state, depth)
-        if result is not None:
-            return result
-        depth += 1
+    depth_limit = 4  # Set the fixed depth limit
+    
+    print(f"Checking depth: {depth_limit}")
+    result = depth_limited_search(start_state, depth_limit)
+    
+    if result is not None:
+        return result
+    else:
+        print("No solution found within the depth limit.")
+        return None
 
 # Depth-Limited Search
 def depth_limited_search(state, depth_limit):
@@ -77,11 +79,9 @@ def get_user_input():
 # Get user input for the initial puzzle state
 initial_puzzle = get_user_input()
 
-# Solve the puzzle using Iterative Deepening Search
+# Solve the puzzle using Iterative Deepening Search with a fixed depth limit of 4
 solution = iterative_deepening_search(initial_puzzle)
 if solution is not None:
     print("Solution found:")
     for row in solution:
         print(row)
-else:
-    print("No solution found within the depth limit.")
